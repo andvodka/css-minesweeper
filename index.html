@@ -1,0 +1,827 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Minesweeper</title>
+		<!--script src="https://cdn.tailwindcss.com"></script-->
+		<style>
+/* ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com */*,
+::after,
+::before {
+  box-sizing:border-box;
+  border-width:0;
+  border-style:solid;
+  border-color:#e5e7eb
+}
+::after,
+::before {
+  --tw-content:''
+}
+html {
+  line-height:1.5;
+  -webkit-text-size-adjust:100%;
+  -moz-tab-size:4;
+  tab-size:4;
+  font-family:ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-feature-settings:normal;
+  font-variation-settings:normal
+}
+body {
+  margin:0;
+  line-height:inherit
+}
+hr {
+  height:0;
+  color:inherit;
+  border-top-width:1px
+}
+abbr:where([title]) {
+  -webkit-text-decoration:underline dotted;
+  text-decoration:underline dotted
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size:inherit;
+  font-weight:inherit
+}
+a {
+  color:inherit;
+  text-decoration:inherit
+}
+b,
+strong {
+  font-weight:bolder
+}
+code,
+kbd,
+pre,
+samp {
+  font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size:1em
+}
+small {
+  font-size:80%
+}
+sub,
+sup {
+  font-size:75%;
+  line-height:0;
+  position:relative;
+  vertical-align:baseline
+}
+sub {
+  bottom:-.25em
+}
+sup {
+  top:-.5em
+}
+table {
+  text-indent:0;
+  border-color:inherit;
+  border-collapse:collapse
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family:inherit;
+  font-feature-settings:inherit;
+  font-variation-settings:inherit;
+  font-size:100%;
+  font-weight:inherit;
+  line-height:inherit;
+  color:inherit;
+  margin:0;
+  padding:0
+}
+button,
+select {
+  text-transform:none
+}
+[type=button],
+[type=reset],
+[type=submit],
+button {
+  -webkit-appearance:button;
+  background-color:transparent;
+  background-image:none
+}
+:-moz-focusring {
+  outline:auto
+}
+:-moz-ui-invalid {
+  box-shadow:none
+}
+progress {
+  vertical-align:baseline
+}
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height:auto
+}
+[type=search] {
+  -webkit-appearance:textfield;
+  outline-offset:-2px
+}
+::-webkit-search-decoration {
+  -webkit-appearance:none
+}
+::-webkit-file-upload-button {
+  -webkit-appearance:button;
+  font:inherit
+}
+summary {
+  display:list-item
+}
+blockquote,
+dd,
+dl,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+pre {
+  margin:0
+}
+fieldset {
+  margin:0;
+  padding:0
+}
+legend {
+  padding:0
+}
+menu,
+ol,
+ul {
+  list-style:none;
+  margin:0;
+  padding:0
+}
+dialog {
+  padding:0
+}
+textarea {
+  resize:vertical
+}
+input::placeholder,
+textarea::placeholder {
+  opacity:1;
+  color:#9ca3af
+}
+[role=button],
+button {
+  cursor:pointer
+}
+:disabled {
+  cursor:default
+}
+audio,
+canvas,
+embed,
+iframe,
+img,
+object,
+svg,
+video {
+  display:block;
+  vertical-align:middle
+}
+img,
+video {
+  max-width:100%;
+  height:auto
+}
+[hidden] {
+  display:none
+}
+*,
+::before,
+::after {
+  --tw-border-spacing-x:0;
+  --tw-border-spacing-y:0;
+  --tw-translate-x:0;
+  --tw-translate-y:0;
+  --tw-rotate:0;
+  --tw-skew-x:0;
+  --tw-skew-y:0;
+  --tw-scale-x:1;
+  --tw-scale-y:1;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
+  --tw-scroll-snap-strictness:proximity;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
+  --tw-ring-offset-width:0px;
+  --tw-ring-offset-color:#fff;
+  --tw-ring-color:rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow:0 0 #0000;
+  --tw-ring-shadow:0 0 #0000;
+  --tw-shadow:0 0 #0000;
+  --tw-shadow-colored:0 0 #0000;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: 
+}
+::backdrop {
+  --tw-border-spacing-x:0;
+  --tw-border-spacing-y:0;
+  --tw-translate-x:0;
+  --tw-translate-y:0;
+  --tw-rotate:0;
+  --tw-skew-x:0;
+  --tw-skew-y:0;
+  --tw-scale-x:1;
+  --tw-scale-y:1;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
+  --tw-scroll-snap-strictness:proximity;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
+  --tw-ring-offset-width:0px;
+  --tw-ring-offset-color:#fff;
+  --tw-ring-color:rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow:0 0 #0000;
+  --tw-ring-shadow:0 0 #0000;
+  --tw-shadow:0 0 #0000;
+  --tw-shadow-colored:0 0 #0000;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: 
+}
+.absolute {
+  position:absolute
+}
+.relative {
+  position:relative
+}
+.z-10 {
+  z-index:10
+}
+.block {
+  display:block
+}
+.flex {
+  display:flex
+}
+.hidden {
+  display:none
+}
+.h-8 {
+  height:2rem
+}
+.h-full {
+  height:100%
+}
+.h-screen {
+  height:100vh
+}
+.w-8 {
+  width:2rem
+}
+.w-fit {
+  width:-moz-fit-content;
+  width:fit-content
+}
+.w-full {
+  width:100%
+}
+.grow {
+  flex-grow:1
+}
+.select-none {
+  -webkit-user-select:none;
+  user-select:none
+}
+.flex-col {
+  flex-direction:column
+}
+.items-center {
+  align-items:center
+}
+.items-stretch {
+  align-items:stretch
+}
+.justify-center {
+  justify-content:center
+}
+.gap-4 {
+  gap:1rem
+}
+.rounded-lg {
+  border-radius:0.5rem
+}
+.border {
+  border-width:1px
+}
+.border-neutral-500 {
+  --tw-border-opacity:1;
+  border-color:rgb(115 115 115 / var(--tw-border-opacity))
+}
+.bg-neutral-300 {
+  --tw-bg-opacity:1;
+  background-color:rgb(212 212 212 / var(--tw-bg-opacity))
+}
+.bg-neutral-400 {
+  --tw-bg-opacity:1;
+  background-color:rgb(163 163 163 / var(--tw-bg-opacity))
+}
+.bg-white {
+  --tw-bg-opacity:1;
+  background-color:rgb(255 255 255 / var(--tw-bg-opacity))
+}
+.p-4 {
+  padding:1rem
+}
+.text-2xl {
+  font-size:1.5rem;
+  line-height:2rem
+}
+.text-blue-700 {
+  --tw-text-opacity:1;
+  color:rgb(29 78 216 / var(--tw-text-opacity))
+}
+.text-red-600 {
+  --tw-text-opacity:1;
+  color:rgb(220 38 38 / var(--tw-text-opacity))
+}
+.text-teal-400 {
+  --tw-text-opacity:1;
+  color:rgb(45 212 191 / var(--tw-text-opacity))
+}
+		</style>
+		<style>
+#sweep-1:checked ~ * [data-sweep-none~="1"],
+#sweep-2:checked ~ * [data-sweep-none~="2"],
+#sweep-3:checked ~ * [data-sweep-none~="3"],
+#sweep-4:checked ~ * [data-sweep-none~="4"],
+#sweep-5:checked ~ * [data-sweep-none~="5"],
+#sweep-6:checked ~ * [data-sweep-none~="6"],
+#sweep-7:checked ~ * [data-sweep-none~="7"],
+#sweep-8:checked ~ * [data-sweep-none~="8"],
+#sweep-9:checked ~ * [data-sweep-none~="9"],
+#sweep-10:checked ~ * [data-sweep-none~="10"],
+#sweep-11:checked ~ * [data-sweep-none~="11"],
+#sweep-12:checked ~ * [data-sweep-none~="12"],
+#sweep-13:checked ~ * [data-sweep-none~="13"],
+#sweep-14:checked ~ * [data-sweep-none~="14"],
+#sweep-15:checked ~ * [data-sweep-none~="15"],
+#sweep-16:checked ~ * [data-sweep-none~="16"],
+#sweep-17:checked ~ * [data-sweep-none~="17"],
+#sweep-18:checked ~ * [data-sweep-none~="18"],
+#sweep-19:checked ~ * [data-sweep-none~="19"],
+#sweep-20:checked ~ * [data-sweep-none~="20"],
+#sweep-21:checked ~ * [data-sweep-none~="21"],
+#sweep-22:checked ~ * [data-sweep-none~="22"],
+#sweep-23:checked ~ * [data-sweep-none~="23"],
+#sweep-24:checked ~ * [data-sweep-none~="24"],
+#sweep-25:checked ~ * [data-sweep-none~="25"],
+#sweep-26:checked ~ * [data-sweep-none~="26"],
+#sweep-27:checked ~ * [data-sweep-none~="27"],
+#sweep-28:checked ~ * [data-sweep-none~="28"],
+#sweep-29:checked ~ * [data-sweep-none~="29"],
+#sweep-30:checked ~ * [data-sweep-none~="30"],
+#sweep-31:checked ~ * [data-sweep-none~="31"],
+#sweep-32:checked ~ * [data-sweep-none~="32"],
+#sweep-33:checked ~ * [data-sweep-none~="33"],
+#sweep-34:checked ~ * [data-sweep-none~="34"],
+#sweep-35:checked ~ * [data-sweep-none~="35"],
+#sweep-36:checked ~ * [data-sweep-none~="36"],
+#sweep-37:checked ~ * [data-sweep-none~="37"],
+#sweep-38:checked ~ * [data-sweep-none~="38"],
+#sweep-39:checked ~ * [data-sweep-none~="39"],
+#sweep-40:checked ~ * [data-sweep-none~="40"],
+#sweep-41:checked ~ * [data-sweep-none~="41"],
+#sweep-42:checked ~ * [data-sweep-none~="42"],
+#sweep-43:checked ~ * [data-sweep-none~="43"],
+#sweep-44:checked ~ * [data-sweep-none~="44"],
+#sweep-45:checked ~ * [data-sweep-none~="45"] {
+  display: none;
+}
+#sweep-1:checked ~ * [data-sweep-block~="1"],
+#sweep-2:checked ~ * [data-sweep-block~="2"],
+#sweep-3:checked ~ * [data-sweep-block~="3"],
+#sweep-4:checked ~ * [data-sweep-block~="4"],
+#sweep-5:checked ~ * [data-sweep-block~="5"],
+#sweep-6:checked ~ * [data-sweep-block~="6"],
+#sweep-7:checked ~ * [data-sweep-block~="7"],
+#sweep-8:checked ~ * [data-sweep-block~="8"],
+#sweep-9:checked ~ * [data-sweep-block~="9"],
+#sweep-10:checked ~ * [data-sweep-block~="10"],
+#sweep-11:checked ~ * [data-sweep-block~="11"],
+#sweep-12:checked ~ * [data-sweep-block~="12"],
+#sweep-13:checked ~ * [data-sweep-block~="13"],
+#sweep-14:checked ~ * [data-sweep-block~="14"],
+#sweep-15:checked ~ * [data-sweep-block~="15"],
+#sweep-16:checked ~ * [data-sweep-block~="16"],
+#sweep-17:checked ~ * [data-sweep-block~="17"],
+#sweep-18:checked ~ * [data-sweep-block~="18"],
+#sweep-19:checked ~ * [data-sweep-block~="19"],
+#sweep-20:checked ~ * [data-sweep-block~="20"],
+#sweep-21:checked ~ * [data-sweep-block~="21"],
+#sweep-22:checked ~ * [data-sweep-block~="22"],
+#sweep-23:checked ~ * [data-sweep-block~="23"],
+#sweep-24:checked ~ * [data-sweep-block~="24"],
+#sweep-25:checked ~ * [data-sweep-block~="25"],
+#sweep-26:checked ~ * [data-sweep-block~="26"],
+#sweep-27:checked ~ * [data-sweep-block~="27"],
+#sweep-28:checked ~ * [data-sweep-block~="28"],
+#sweep-29:checked ~ * [data-sweep-block~="29"],
+#sweep-30:checked ~ * [data-sweep-block~="30"],
+#sweep-31:checked ~ * [data-sweep-block~="31"],
+#sweep-32:checked ~ * [data-sweep-block~="32"],
+#sweep-33:checked ~ * [data-sweep-block~="33"],
+#sweep-34:checked ~ * [data-sweep-block~="34"],
+#sweep-35:checked ~ * [data-sweep-block~="35"],
+#sweep-36:checked ~ * [data-sweep-block~="36"],
+#sweep-37:checked ~ * [data-sweep-block~="37"],
+#sweep-38:checked ~ * [data-sweep-block~="38"],
+#sweep-39:checked ~ * [data-sweep-block~="39"],
+#sweep-40:checked ~ * [data-sweep-block~="40"],
+#sweep-41:checked ~ * [data-sweep-block~="41"],
+#sweep-42:checked ~ * [data-sweep-block~="42"],
+#sweep-43:checked ~ * [data-sweep-block~="43"],
+#sweep-44:checked ~ * [data-sweep-block~="44"],
+#sweep-45:checked ~ * [data-sweep-block~="45"] {
+  display: block;
+}
+		</style>
+	</head>
+	<body>
+		<div class="flex flex-col h-screen">
+			<div class="grow">
+				<div class="h-full bg-neutral-300">
+					<input class="hidden" id="sweep-1" type="checkbox" />
+					<input class="hidden" id="sweep-2" type="checkbox" />
+					<input class="hidden" id="sweep-3" type="checkbox" />
+					<input class="hidden" id="sweep-4" type="checkbox" />
+					<input class="hidden" id="sweep-5" type="checkbox" />
+					<input class="hidden" id="sweep-6" type="checkbox" />
+					<input class="hidden" id="sweep-7" type="checkbox" />
+					<input class="hidden" id="sweep-8" type="checkbox" />
+					<input class="hidden" id="sweep-9" type="checkbox" />
+					<input class="hidden" id="sweep-10" type="checkbox" />
+					<input class="hidden" id="sweep-11" type="checkbox" />
+					<input class="hidden" id="sweep-12" type="checkbox" />
+					<input class="hidden" id="sweep-13" type="checkbox" />
+					<input class="hidden" id="sweep-14" type="checkbox" />
+					<input class="hidden" id="sweep-15" type="checkbox" />
+					<input class="hidden" id="sweep-16" type="checkbox" />
+					<input class="hidden" id="sweep-17" type="checkbox" />
+					<input class="hidden" id="sweep-18" type="checkbox" />
+					<input class="hidden" id="sweep-19" type="checkbox" />
+					<input class="hidden" id="sweep-20" type="checkbox" />
+					<input class="hidden" id="sweep-21" type="checkbox" />
+					<input class="hidden" id="sweep-22" type="checkbox" />
+					<input class="hidden" id="sweep-23" type="checkbox" />
+					<input class="hidden" id="sweep-24" type="checkbox" />
+					<input class="hidden" id="sweep-25" type="checkbox" />
+					<input class="hidden" id="sweep-26" type="checkbox" />
+					<input class="hidden" id="sweep-27" type="checkbox" />
+					<input class="hidden" id="sweep-28" type="checkbox" />
+					<input class="hidden" id="sweep-29" type="checkbox" />
+					<input class="hidden" id="sweep-30" type="checkbox" />
+					<input class="hidden" id="sweep-31" type="checkbox" />
+					<input class="hidden" id="sweep-32" type="checkbox" />
+					<input class="hidden" id="sweep-33" type="checkbox" />
+					<input class="hidden" id="sweep-34" type="checkbox" />
+					<input class="hidden" id="sweep-35" type="checkbox" />
+					<input class="hidden" id="sweep-36" type="checkbox" />
+					<input class="hidden" id="sweep-37" type="checkbox" />
+					<input class="hidden" id="sweep-38" type="checkbox" />
+					<input class="hidden" id="sweep-39" type="checkbox" />
+					<input class="hidden" id="sweep-40" type="checkbox" />
+					<input class="hidden" id="sweep-41" type="checkbox" />
+					<input class="hidden" id="sweep-42" type="checkbox" />
+					<input class="hidden" id="sweep-43" type="checkbox" />
+					<input class="hidden" id="sweep-44" type="checkbox" />
+					<input class="hidden" id="sweep-45" type="checkbox" />
+					<div class="relative flex flex-col justify-center items-center h-full">
+						<div class="hidden absolute w-full h-full z-10" style="background-color: rgba(0, 0, 0, 0.4);" data-sweep-block="8 12 17 25 27 30 39 42">
+							<div class="flex flex-col justify-center items-center w-full h-full">
+								<div class="flex flex-col gap-4 justify-center items-stretch">
+									<a class="flex gap-4 justify-center items-center p-4 text-2xl bg-white rounded-lg" href="">
+										<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+											<!-- Bootstrap Icons v1.10.0 MIT https://getbootstrap.com/ -->
+											<path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+											<path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+										</svg>
+										<span>Try again</span>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="w-fit border border-neutral-500 select-none">
+							<div class="flex">
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+							</div>
+							<div class="flex">
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-2" data-sweep-none="1 2"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-3" data-sweep-none="1 3"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-4" data-sweep-none="1 4"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-5" data-sweep-none="1 5"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-6" data-sweep-none="1 6"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+							</div>
+							<div class="flex">
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-7" data-sweep-none="1 7"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-8" data-sweep-none="8"></label>
+									<span class="text-2xl">💣</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-9" data-sweep-none="1 9"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-10" data-sweep-none="1 10"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-11" data-sweep-none="1 11"></label>
+									<span class="text-2xl text-teal-400">2</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-12" data-sweep-none="12"></label>
+									<span class="text-2xl">💣</span>
+								</div>
+							</div>
+							<div class="flex">
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-13" data-sweep-none="1 13"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-14" data-sweep-none="14"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-15" data-sweep-none="1 15"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-16" data-sweep-none="1 16"></label>
+									<span class="text-2xl text-teal-400">2</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-17" data-sweep-none="17"></label>
+									<span class="text-2xl">💣</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-18" data-sweep-none="18"></label>
+									<span class="text-2xl text-red-600">3</span>
+								</div>
+							</div>
+							<div class="flex">
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-19" data-sweep-none="1 19"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-20" data-sweep-none="1 20"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-21" data-sweep-none="21"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-22" data-sweep-none="1 22"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-23" data-sweep-none="1 23"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-24" data-sweep-none="1 24"></label>
+									<span class="text-2xl text-teal-400">2</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-25" data-sweep-none="25"></label>
+									<span class="text-2xl">💣</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-26" data-sweep-none="26"></label>
+									<span class="text-2xl text-teal-400">2</span>
+								</div>
+							</div>
+							<div class="flex">
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-27" data-sweep-none="27"></label>
+									<span class="text-2xl">💣</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-28" data-sweep-none="28"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-29" data-sweep-none="29"></label>
+									<span class="text-2xl text-teal-400">2</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-30" data-sweep-none="30"></label>
+									<span class="text-2xl">💣</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-32" data-sweep-none="31 32"></label>
+									<span class="text-2xl text-teal-400">2</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-33" data-sweep-none="31 33"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-34" data-sweep-none="31 34"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-35" data-sweep-none="31 35"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+							</div>
+							<div class="flex">
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-36" data-sweep-none="36"></label>
+									<span class="text-2xl text-teal-400">2</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-37" data-sweep-none="37"></label>
+									<span class="text-2xl text-teal-400">2</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-38" data-sweep-none="38"></label>
+									<span class="text-2xl text-red-600">3</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-39" data-sweep-none="39"></label>
+									<span class="text-2xl">💣</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-40" data-sweep-none="31 40"></label>
+									<span class="text-2xl text-teal-400">2</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
+								</div>
+							</div>
+							<div class="flex">
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-41" data-sweep-none="41"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-42" data-sweep-none="42"></label>
+									<span class="text-2xl">💣</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-43" data-sweep-none="43"></label>
+									<span class="text-2xl text-teal-400">2</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-44" data-sweep-none="44"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-45" data-sweep-none="31 45"></label>
+									<span class="text-2xl text-blue-700">1</span>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
+								</div>
+								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
+									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
