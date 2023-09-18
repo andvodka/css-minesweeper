@@ -6,422 +6,396 @@
 		<title>Minesweeper</title>
 		<link href="/src/style.css" rel="stylesheet">
 		<style>
-#sweep-1:checked ~ * [data-sweep-none~="1"],
-#sweep-2:checked ~ * [data-sweep-none~="2"],
-#sweep-3:checked ~ * [data-sweep-none~="3"],
-#sweep-4:checked ~ * [data-sweep-none~="4"],
-#sweep-5:checked ~ * [data-sweep-none~="5"],
-#sweep-6:checked ~ * [data-sweep-none~="6"],
-#sweep-7:checked ~ * [data-sweep-none~="7"],
-#sweep-8:checked ~ * [data-sweep-none~="8"],
-#sweep-9:checked ~ * [data-sweep-none~="9"],
-#sweep-10:checked ~ * [data-sweep-none~="10"],
-#sweep-11:checked ~ * [data-sweep-none~="11"],
-#sweep-12:checked ~ * [data-sweep-none~="12"],
-#sweep-13:checked ~ * [data-sweep-none~="13"],
-#sweep-14:checked ~ * [data-sweep-none~="14"],
-#sweep-15:checked ~ * [data-sweep-none~="15"],
-#sweep-16:checked ~ * [data-sweep-none~="16"],
-#sweep-17:checked ~ * [data-sweep-none~="17"],
-#sweep-18:checked ~ * [data-sweep-none~="18"],
-#sweep-19:checked ~ * [data-sweep-none~="19"],
-#sweep-20:checked ~ * [data-sweep-none~="20"],
-#sweep-21:checked ~ * [data-sweep-none~="21"],
-#sweep-22:checked ~ * [data-sweep-none~="22"],
-#sweep-23:checked ~ * [data-sweep-none~="23"],
-#sweep-24:checked ~ * [data-sweep-none~="24"],
-#sweep-25:checked ~ * [data-sweep-none~="25"],
-#sweep-26:checked ~ * [data-sweep-none~="26"],
-#sweep-27:checked ~ * [data-sweep-none~="27"],
-#sweep-28:checked ~ * [data-sweep-none~="28"],
-#sweep-29:checked ~ * [data-sweep-none~="29"],
-#sweep-30:checked ~ * [data-sweep-none~="30"],
-#sweep-31:checked ~ * [data-sweep-none~="31"],
-#sweep-32:checked ~ * [data-sweep-none~="32"],
-#sweep-33:checked ~ * [data-sweep-none~="33"],
-#sweep-34:checked ~ * [data-sweep-none~="34"],
-#sweep-35:checked ~ * [data-sweep-none~="35"],
-#sweep-36:checked ~ * [data-sweep-none~="36"],
-#sweep-37:checked ~ * [data-sweep-none~="37"],
-#sweep-38:checked ~ * [data-sweep-none~="38"],
-#sweep-39:checked ~ * [data-sweep-none~="39"],
-#sweep-40:checked ~ * [data-sweep-none~="40"],
-#sweep-41:checked ~ * [data-sweep-none~="41"],
-#sweep-42:checked ~ * [data-sweep-none~="42"],
-#sweep-43:checked ~ * [data-sweep-none~="43"],
-#sweep-44:checked ~ * [data-sweep-none~="44"],
-#sweep-45:checked ~ * [data-sweep-none~="45"] {
-  display: none;
+:root {
+	--bg-swept: #999;
+	--bg-surface: #ccc;
+	--border-color: #666;
+	--text-1-color: #36c;
+	--text-2-color: #3cc;
+	--text-3-color: #c33;
+	--grid-width: 2rem;
+	--grid-height: 2rem;
+	--scope-width: calc(var(--grid-width) * 8);
+	--scope-height: calc(var(--grid-width) * 8);
 }
-#sweep-1:checked ~ * [data-sweep-block~="1"],
-#sweep-2:checked ~ * [data-sweep-block~="2"],
-#sweep-3:checked ~ * [data-sweep-block~="3"],
-#sweep-4:checked ~ * [data-sweep-block~="4"],
-#sweep-5:checked ~ * [data-sweep-block~="5"],
-#sweep-6:checked ~ * [data-sweep-block~="6"],
-#sweep-7:checked ~ * [data-sweep-block~="7"],
-#sweep-8:checked ~ * [data-sweep-block~="8"],
-#sweep-9:checked ~ * [data-sweep-block~="9"],
-#sweep-10:checked ~ * [data-sweep-block~="10"],
-#sweep-11:checked ~ * [data-sweep-block~="11"],
-#sweep-12:checked ~ * [data-sweep-block~="12"],
-#sweep-13:checked ~ * [data-sweep-block~="13"],
-#sweep-14:checked ~ * [data-sweep-block~="14"],
-#sweep-15:checked ~ * [data-sweep-block~="15"],
-#sweep-16:checked ~ * [data-sweep-block~="16"],
-#sweep-17:checked ~ * [data-sweep-block~="17"],
-#sweep-18:checked ~ * [data-sweep-block~="18"],
-#sweep-19:checked ~ * [data-sweep-block~="19"],
-#sweep-20:checked ~ * [data-sweep-block~="20"],
-#sweep-21:checked ~ * [data-sweep-block~="21"],
-#sweep-22:checked ~ * [data-sweep-block~="22"],
-#sweep-23:checked ~ * [data-sweep-block~="23"],
-#sweep-24:checked ~ * [data-sweep-block~="24"],
-#sweep-25:checked ~ * [data-sweep-block~="25"],
-#sweep-26:checked ~ * [data-sweep-block~="26"],
-#sweep-27:checked ~ * [data-sweep-block~="27"],
-#sweep-28:checked ~ * [data-sweep-block~="28"],
-#sweep-29:checked ~ * [data-sweep-block~="29"],
-#sweep-30:checked ~ * [data-sweep-block~="30"],
-#sweep-31:checked ~ * [data-sweep-block~="31"],
-#sweep-32:checked ~ * [data-sweep-block~="32"],
-#sweep-33:checked ~ * [data-sweep-block~="33"],
-#sweep-34:checked ~ * [data-sweep-block~="34"],
-#sweep-35:checked ~ * [data-sweep-block~="35"],
-#sweep-36:checked ~ * [data-sweep-block~="36"],
-#sweep-37:checked ~ * [data-sweep-block~="37"],
-#sweep-38:checked ~ * [data-sweep-block~="38"],
-#sweep-39:checked ~ * [data-sweep-block~="39"],
-#sweep-40:checked ~ * [data-sweep-block~="40"],
-#sweep-41:checked ~ * [data-sweep-block~="41"],
-#sweep-42:checked ~ * [data-sweep-block~="42"],
-#sweep-43:checked ~ * [data-sweep-block~="43"],
-#sweep-44:checked ~ * [data-sweep-block~="44"],
-#sweep-45:checked ~ * [data-sweep-block~="45"] {
-  display: block;
+.swept {
+	background-color: var(--bg-swept);
+	border-color: var(--border-color);
+	border-width: 1px;
+	justify-content: center;
+	align-items: center;
+	right: calc(var(--scope-width) - var(--grid-width));
+	bottom:calc(var(--scope-height) - var(--grid-height));
+	width: var(--grid-width);
+	height: var(--grid-height);
+	display: flex;
+	user-select: none;
+}
+.surface {
+	background-color: var(--bg-surface);
+	border-color: var(--border-color);
+	border-width: 1px;
+	justify-content: center;
+	align-items: center;
+	right: calc(var(--scope-width) - var(--grid-width));
+	bottom:calc(var(--scope-height) - var(--grid-height));
+	width: var(--grid-width);
+	height: var(--grid-height);
+	display: flex;
+	user-select: none;
 }
 		</style>
 	</head>
 	<body>
 		<div class="flex flex-col h-screen">
 			<div class="grow">
-				<div class="h-full bg-neutral-300">
-					<input class="hidden" id="sweep-1" type="checkbox" />
-					<input class="hidden" id="sweep-2" type="checkbox" />
-					<input class="hidden" id="sweep-3" type="checkbox" />
-					<input class="hidden" id="sweep-4" type="checkbox" />
-					<input class="hidden" id="sweep-5" type="checkbox" />
-					<input class="hidden" id="sweep-6" type="checkbox" />
-					<input class="hidden" id="sweep-7" type="checkbox" />
-					<input class="hidden" id="sweep-8" type="checkbox" />
-					<input class="hidden" id="sweep-9" type="checkbox" />
-					<input class="hidden" id="sweep-10" type="checkbox" />
-					<input class="hidden" id="sweep-11" type="checkbox" />
-					<input class="hidden" id="sweep-12" type="checkbox" />
-					<input class="hidden" id="sweep-13" type="checkbox" />
-					<input class="hidden" id="sweep-14" type="checkbox" />
-					<input class="hidden" id="sweep-15" type="checkbox" />
-					<input class="hidden" id="sweep-16" type="checkbox" />
-					<input class="hidden" id="sweep-17" type="checkbox" />
-					<input class="hidden" id="sweep-18" type="checkbox" />
-					<input class="hidden" id="sweep-19" type="checkbox" />
-					<input class="hidden" id="sweep-20" type="checkbox" />
-					<input class="hidden" id="sweep-21" type="checkbox" />
-					<input class="hidden" id="sweep-22" type="checkbox" />
-					<input class="hidden" id="sweep-23" type="checkbox" />
-					<input class="hidden" id="sweep-24" type="checkbox" />
-					<input class="hidden" id="sweep-25" type="checkbox" />
-					<input class="hidden" id="sweep-26" type="checkbox" />
-					<input class="hidden" id="sweep-27" type="checkbox" />
-					<input class="hidden" id="sweep-28" type="checkbox" />
-					<input class="hidden" id="sweep-29" type="checkbox" />
-					<input class="hidden" id="sweep-30" type="checkbox" />
-					<input class="hidden" id="sweep-31" type="checkbox" />
-					<input class="hidden" id="sweep-32" type="checkbox" />
-					<input class="hidden" id="sweep-33" type="checkbox" />
-					<input class="hidden" id="sweep-34" type="checkbox" />
-					<input class="hidden" id="sweep-35" type="checkbox" />
-					<input class="hidden" id="sweep-36" type="checkbox" />
-					<input class="hidden" id="sweep-37" type="checkbox" />
-					<input class="hidden" id="sweep-38" type="checkbox" />
-					<input class="hidden" id="sweep-39" type="checkbox" />
-					<input class="hidden" id="sweep-40" type="checkbox" />
-					<input class="hidden" id="sweep-41" type="checkbox" />
-					<input class="hidden" id="sweep-42" type="checkbox" />
-					<input class="hidden" id="sweep-43" type="checkbox" />
-					<input class="hidden" id="sweep-44" type="checkbox" />
-					<input class="hidden" id="sweep-45" type="checkbox" />
-					<div class="relative flex flex-col justify-center items-center h-full">
-						<div class="hidden absolute w-full h-full z-10" style="background-color: rgba(0, 0, 0, 0.4);" data-sweep-block="8 12 17 25 27 30 39 42">
-							<div class="flex flex-col justify-center items-center w-full h-full">
-								<div class="flex flex-col gap-4 justify-center items-stretch">
-									<a class="flex gap-4 justify-center items-center p-4 text-2xl bg-white rounded-lg" href="">
-										<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-											<!-- Bootstrap Icons v1.10.0 MIT https://getbootstrap.com/ -->
-											<path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-											<path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-										</svg>
-										<span>Try again</span>
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="w-fit border border-neutral-500 select-none">
-							<div class="flex">
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-							</div>
-							<div class="flex">
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-2" data-sweep-none="1 2"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-3" data-sweep-none="1 3"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-4" data-sweep-none="1 4"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-5" data-sweep-none="1 5"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-6" data-sweep-none="1 6"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-							</div>
-							<div class="flex">
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-7" data-sweep-none="1 7"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-8" data-sweep-none="8"></label>
-									<span class="text-2xl">💣</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-9" data-sweep-none="1 9"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-10" data-sweep-none="1 10"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-11" data-sweep-none="1 11"></label>
-									<span class="text-2xl text-teal-400">2</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-12" data-sweep-none="12"></label>
-									<span class="text-2xl">💣</span>
-								</div>
-							</div>
-							<div class="flex">
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-13" data-sweep-none="1 13"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-14" data-sweep-none="14"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-15" data-sweep-none="1 15"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-1" data-sweep-none="1"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-16" data-sweep-none="1 16"></label>
-									<span class="text-2xl text-teal-400">2</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-17" data-sweep-none="17"></label>
-									<span class="text-2xl">💣</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-18" data-sweep-none="18"></label>
-									<span class="text-2xl text-red-600">3</span>
-								</div>
-							</div>
-							<div class="flex">
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-19" data-sweep-none="1 19"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-20" data-sweep-none="1 20"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-21" data-sweep-none="21"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-22" data-sweep-none="1 22"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-23" data-sweep-none="1 23"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-24" data-sweep-none="1 24"></label>
-									<span class="text-2xl text-teal-400">2</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-25" data-sweep-none="25"></label>
-									<span class="text-2xl">💣</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-26" data-sweep-none="26"></label>
-									<span class="text-2xl text-teal-400">2</span>
-								</div>
-							</div>
-							<div class="flex">
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-27" data-sweep-none="27"></label>
-									<span class="text-2xl">💣</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-28" data-sweep-none="28"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-29" data-sweep-none="29"></label>
-									<span class="text-2xl text-teal-400">2</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-30" data-sweep-none="30"></label>
-									<span class="text-2xl">💣</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-32" data-sweep-none="31 32"></label>
-									<span class="text-2xl text-teal-400">2</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-33" data-sweep-none="31 33"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-34" data-sweep-none="31 34"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-35" data-sweep-none="31 35"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-							</div>
-							<div class="flex">
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-36" data-sweep-none="36"></label>
-									<span class="text-2xl text-teal-400">2</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-37" data-sweep-none="37"></label>
-									<span class="text-2xl text-teal-400">2</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-38" data-sweep-none="38"></label>
-									<span class="text-2xl text-red-600">3</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-39" data-sweep-none="39"></label>
-									<span class="text-2xl">💣</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-40" data-sweep-none="31 40"></label>
-									<span class="text-2xl text-teal-400">2</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
-								</div>
-							</div>
-							<div class="flex">
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-41" data-sweep-none="41"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-42" data-sweep-none="42"></label>
-									<span class="text-2xl">💣</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-43" data-sweep-none="43"></label>
-									<span class="text-2xl text-teal-400">2</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-44" data-sweep-none="44"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-45" data-sweep-none="31 45"></label>
-									<span class="text-2xl text-blue-700">1</span>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
-								</div>
-								<div class="relative flex justify-center items-center w-8 h-8 bg-neutral-400 border border-neutral-500">
-									<label class="block absolute w-full h-full bg-neutral-300" for="sweep-31" data-sweep-none="31"></label>
-								</div>
+				<div class="relative w-full h-full bg-[var(--bg-surface)]">
+					<input class="hidden peer/sweep-1" id="sweep-1" type="checkbox" />
+					<input class="hidden peer/sweep-2" id="sweep-2" type="checkbox" />
+					<input class="hidden peer/sweep-3" id="sweep-3" type="checkbox" />
+					<input class="hidden peer/sweep-4" id="sweep-4" type="checkbox" />
+					<input class="hidden peer/sweep-5" id="sweep-5" type="checkbox" />
+					<input class="hidden peer/sweep-6" id="sweep-6" type="checkbox" />
+					<input class="hidden peer/sweep-7" id="sweep-7" type="checkbox" />
+					<input class="hidden peer/sweep-8" id="sweep-8" type="checkbox" />
+					<input class="hidden peer/sweep-9" id="sweep-9" type="checkbox" />
+					<input class="hidden peer/sweep-10" id="sweep-10" type="checkbox" />
+					<input class="hidden peer/sweep-11" id="sweep-11" type="checkbox" />
+					<input class="hidden peer/sweep-12" id="sweep-12" type="checkbox" />
+					<input class="hidden peer/sweep-13" id="sweep-13" type="checkbox" />
+					<input class="hidden peer/sweep-14" id="sweep-14" type="checkbox" />
+					<input class="hidden peer/sweep-15" id="sweep-15" type="checkbox" />
+					<input class="hidden peer/sweep-16" id="sweep-16" type="checkbox" />
+					<input class="hidden peer/sweep-17" id="sweep-17" type="checkbox" />
+					<input class="hidden peer/sweep-18" id="sweep-18" type="checkbox" />
+					<input class="hidden peer/sweep-19" id="sweep-19" type="checkbox" />
+					<input class="hidden peer/sweep-20" id="sweep-20" type="checkbox" />
+					<input class="hidden peer/sweep-21" id="sweep-21" type="checkbox" />
+					<input class="hidden peer/sweep-22" id="sweep-22" type="checkbox" />
+					<input class="hidden peer/sweep-23" id="sweep-23" type="checkbox" />
+					<input class="hidden peer/sweep-24" id="sweep-24" type="checkbox" />
+					<input class="hidden peer/sweep-25" id="sweep-25" type="checkbox" />
+					<input class="hidden peer/sweep-26" id="sweep-26" type="checkbox" />
+					<input class="hidden peer/sweep-27" id="sweep-27" type="checkbox" />
+					<input class="hidden peer/sweep-28" id="sweep-28" type="checkbox" />
+					<input class="hidden peer/sweep-29" id="sweep-29" type="checkbox" />
+					<input class="hidden peer/sweep-30" id="sweep-30" type="checkbox" />
+					<input class="hidden peer/sweep-31" id="sweep-31" type="checkbox" />
+					<input class="hidden peer/sweep-32" id="sweep-32" type="checkbox" />
+					<input class="hidden peer/sweep-33" id="sweep-33" type="checkbox" />
+					<input class="hidden peer/sweep-34" id="sweep-34" type="checkbox" />
+					<input class="hidden peer/sweep-35" id="sweep-35" type="checkbox" />
+					<input class="hidden peer/sweep-36" id="sweep-36" type="checkbox" />
+					<input class="hidden peer/sweep-37" id="sweep-37" type="checkbox" />
+					<input class="hidden peer/sweep-38" id="sweep-38" type="checkbox" />
+					<input class="hidden peer/sweep-39" id="sweep-39" type="checkbox" />
+					<input class="hidden peer/sweep-40" id="sweep-40" type="checkbox" />
+					<input class="hidden peer/sweep-41" id="sweep-41" type="checkbox" />
+					<input class="hidden peer/sweep-42" id="sweep-42" type="checkbox" />
+					<input class="hidden peer/sweep-43" id="sweep-43" type="checkbox" />
+					<input class="hidden peer/sweep-44" id="sweep-44" type="checkbox" />
+					<input class="hidden peer/sweep-45" id="sweep-45" type="checkbox" />
+					<!-- Ground -->
+					<div class="absolute inset-0 m-auto w-[calc(var(--grid-width)*8+2px)] h-[calc(var(--grid-height)*8+2px)] border border-[color:var(--border-color)] select-none"></div>
+					<!-- (0, 0) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*0)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (0, 1) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*1)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (0, 2) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*2)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (0, 3) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*3)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (0, 4) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*4)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (0, 5) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*5)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (0, 6) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*6)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (0, 7) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*7)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (1, 0) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*0)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (1, 1) 2 {1, 2} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*1)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-1:hidden peer-checked/sweep-2:hidden surface" for="sweep-2"></label>
+					<!-- (1, 2) 3 {1, 3} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*2)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-1:hidden peer-checked/sweep-3:hidden surface" for="sweep-3"></label>
+					<!-- (1, 3) 4 {1, 4} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*3)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-1:hidden peer-checked/sweep-4:hidden surface" for="sweep-4"></label>
+					<!-- (1, 4) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*4)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (1, 5) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*5)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (1, 6) 5 {1, 5} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*6)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-1:hidden peer-checked/sweep-5:hidden surface" for="sweep-5"></label>
+					<!-- (1, 7) 6 {1, 6} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*7)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-1:hidden peer-checked/sweep-6:hidden surface" for="sweep-6"></label>
+					<!-- (2, 0) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*0)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (2, 1) 7 {1, 7} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*1)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<div class="relative w-[calc(var(--grid-width)*8)] h-[calc(var(--grid-height)*8)] border border-[color:var(--border-color)] select-none hidden">
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-1:hidden peer-checked/sweep-7:hidden surface" for="sweep-7"></label>
+					<!-- (2, 2) 8 {8} 💣 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*2)] swept">
+						<span class="text-2xl">💣</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-8:hidden surface" for="sweep-8"></label>
+					<!-- (2, 3) 9 {1, 9} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*3)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-1:hidden peer-checked/sweep-9:hidden surface" for="sweep-9"></label>
+					<!-- (2, 4) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*4)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (2, 5) 10 {1, 10} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*5)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-1:hidden peer-checked/sweep-10:hidden surface" for="sweep-10"></label>
+					<!-- (2, 6) 11 {1, 11} 2 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*6)] swept">
+						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-1:hidden peer-checked/sweep-11:hidden surface" for="sweep-11"></label>
+					<!-- (2, 7) 12 {12} 💣 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*7)] swept">
+						<span class="text-2xl">💣</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-12:hidden surface" for="sweep-12"></label>
+					<!-- (3, 0) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*0)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (3, 1) 13 {1, 13} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*1)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-1:hidden peer-checked/sweep-13:hidden surface" for="sweep-13"></label>
+					<!-- (3, 2) 14 {14} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*2)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-14:hidden surface" for="sweep-14"></label>
+					<!-- (3, 3) 15 {1, 15} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*3)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-1:hidden peer-checked/sweep-15:hidden surface" for="sweep-15"></label>
+					<!-- (3, 4) 1 {1} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*4)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<!-- (3, 5) 16 {1, 16} 2 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*5)] swept">
+						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-1:hidden peer-checked/sweep-16:hidden surface" for="sweep-16"></label>
+					<!-- (3, 6) 17 {17} 💣 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*6)] swept">
+						<span class="text-2xl">💣</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-17:hidden surface" for="sweep-17"></label>
+					<!-- (3, 7) 18 {18} 3 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*7)] swept">
+						<span class="text-2xl text-[color:var(--text-3-color)]">3</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-18:hidden surface" for="sweep-18"></label>
+					<!-- (4, 0) 19 {1, 19} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*0)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-1:hidden peer-checked/sweep-19:hidden surface" for="sweep-19"></label>
+					<!-- (4, 1) 20 {1, 20} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*1)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-1:hidden peer-checked/sweep-20:hidden surface" for="sweep-20"></label>
+					<!-- (4, 2) 21 {21} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*2)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-21:hidden surface" for="sweep-21"></label>
+					<!-- (4, 3) 22 {1, 22} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*3)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-1:hidden peer-checked/sweep-22:hidden surface" for="sweep-22"></label>
+					<!-- (4, 4) 23 {1, 23} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*4)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-1:hidden peer-checked/sweep-23:hidden surface" for="sweep-23"></label>
+					<!-- (4, 5) 24 {1, 24} 2 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*5)] swept">
+						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-1:hidden peer-checked/sweep-24:hidden surface" for="sweep-24"></label>
+					<!-- (4, 6) 25 {25} 💣 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*6)] swept">
+						<span class="text-2xl">💣</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-25:hidden surface" for="sweep-25"></label>
+					<!-- (4, 7) 26 {26} 2 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*7)] swept">
+						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-26:hidden surface" for="sweep-26"></label>
+					<!-- (5, 0) 27 {27} 💣 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*0)] swept">
+						<span class="text-2xl">💣</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-27:hidden surface" for="sweep-27"></label>
+					<!-- (5, 1) 28 {28} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*1)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-28:hidden surface" for="sweep-28"></label>
+					<!-- (5, 2) 29 {29} 2 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*2)] swept">
+						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-29:hidden surface" for="sweep-29"></label>
+					<!-- (5, 3) 30 {30} 💣 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*3)] swept">
+						<span class="text-2xl">💣</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-30:hidden surface" for="sweep-30"></label>
+					<!-- (5, 4) 32 {31, 32} 2 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*4)] swept">
+						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-31:hidden peer-checked/sweep-32:hidden surface" for="sweep-32"></label>
+					<!-- (5, 5) 33 {31, 33} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*5)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-31:hidden peer-checked/sweep-33:hidden surface" for="sweep-33"></label>
+					<!-- (5, 6) 34 {31, 34} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*6)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-31:hidden peer-checked/sweep-34:hidden surface" for="sweep-34"></label>
+					<!-- (5, 7) 35 {31, 35} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*7)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-31:hidden peer-checked/sweep-35:hidden surface" for="sweep-35"></label>
+					<!-- (6, 0) 36 {36} 2 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*0)] swept">
+						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-36:hidden surface" for="sweep-36"></label>
+					<!-- (6, 1) 37 {37} 2 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*1)] swept">
+						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-37:hidden surface" for="sweep-37"></label>
+					<!-- (6, 2) 38 {38} 3 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*2)] swept">
+						<span class="text-2xl text-[color:var(--text-3-color)]">3</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-38:hidden surface" for="sweep-38"></label>
+					<!-- (6, 3) 39 {39} 💣 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*3)] swept">
+						<span class="text-2xl">💣</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-39:hidden surface" for="sweep-39"></label>
+					<!-- (6, 4) 40 {31, 40} 2 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*4)] swept">
+						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-31:hidden peer-checked/sweep-40:hidden surface" for="sweep-40"></label>
+					<!-- (6, 5) 31 {31} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*5)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<!-- (6, 6) 31 {31} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*6)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<!-- (6, 7) 31 {31} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*7)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<!-- (7, 0) 41 {41} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*0)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-41:hidden surface" for="sweep-41"></label>
+					<!-- (7, 1) 42 {42} 💣 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*1)] swept">
+						<span class="text-2xl">💣</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-42:hidden surface" for="sweep-42"></label>
+					<!-- (7, 2) 43 {43} 2 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*2)] swept">
+						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-43:hidden surface" for="sweep-43"></label>
+					<!-- (7, 3) 44 {44} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*3)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-44:hidden surface" for="sweep-44"></label>
+					<!-- (7, 4) 45 {31, 45} 1 -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*4)] swept">
+						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
+					</div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-31:hidden peer-checked/sweep-45:hidden surface" for="sweep-45"></label>
+					<!-- (7, 5) 31 {31} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*5)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<!-- (7, 6) 31 {31} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*6)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<!-- (7, 7) 31 {31} -->
+					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*7)] swept"></div>
+					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<!-- Modal Try again -->
+					<div class="hidden absolute w-full h-full z-10 bg-[#0006] peer-checked/sweep-8:block peer-checked/sweep-12:block peer-checked/sweep-17:block peer-checked/sweep-25:block peer-checked/sweep-27:block peer-checked/sweep-30:block peer-checked/sweep-39:block peer-checked/sweep-42:block">
+						<div class="flex flex-col justify-center items-center w-full h-full">
+							<div class="flex flex-col gap-4 justify-center items-stretch">
+								<a class="flex gap-4 justify-center items-center p-4 text-2xl bg-white rounded-lg" href="">
+									<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+										<!-- Bootstrap Icons v1.10.0 MIT https://getbootstrap.com/ -->
+										<path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+										<path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+									</svg>
+									<span>Try again</span>
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+		</div>
 		</div>
 	</body>
 </html>
