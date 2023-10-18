@@ -8,43 +8,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root {
-	--bg-swept: #999;
-	--bg-surface: #ccc;
-	--border-color: #666;
-	--text-1-color: #36c;
-	--text-2-color: #3cc;
-	--text-3-color: #c33;
-	--grid-width: 2rem;
-	--grid-height: 2rem;
-	--scope-width: calc(var(--grid-width) * 8);
-	--scope-height: calc(var(--grid-width) * 8);
+
+@layer base {
+	:root {
+		--bg-swept: #999;
+		--bg-surface: #ccc;
+		--border-color: #666;
+		--text-1-color: #36c;
+		--text-2-color: #3cc;
+		--text-3-color: #c33;
+		--grid-width: 2rem;
+		--grid-height: 2rem;
+		--scope-width: calc(var(--grid-width) * 8);
+		--scope-height: calc(var(--grid-width) * 8);
+	}
 }
-.swept {
-	background-color: var(--bg-swept);
-	border-color: var(--border-color);
-	border-width: 1px;
-	justify-content: center;
-	align-items: center;
-	right: calc(var(--scope-width) - var(--grid-width));
-	bottom:calc(var(--scope-height) - var(--grid-height));
-	width: var(--grid-width);
-	height: var(--grid-height);
-	display: flex;
-	user-select: none;
-}
-.surface {
-	background-color: var(--bg-surface);
-	border-color: var(--border-color);
-	border-width: 1px;
-	justify-content: center;
-	align-items: center;
-	right: calc(var(--scope-width) - var(--grid-width));
-	bottom:calc(var(--scope-height) - var(--grid-height));
-	width: var(--grid-width);
-	height: var(--grid-height);
-	display: flex;
-	user-select: none;
+@layer utilities {
+	.surface {
+		@apply
+		flex
+		top-0
+		right-[calc(var(--scope-width)-var(--grid-width))]
+		bottom-[calc(var(--scope-height)-var(--grid-height))]
+		left-0
+		w-[--grid-width]
+		h-[--grid-height]
+		bg-[--bg-surface]
+		border
+		border-[--border-color]
+		justify-center
+		items-center
+		select-none
+		;
+	}
+	.swept {
+		@apply surface;
+		@apply bg-[--bg-swept];
+	}
+	.place {
+		--place-x: 0;
+		--place-y: 0;
+		@apply
+		absolute
+		m-auto
+		translate-x-[calc(var(--grid-width)*var(--place-x))]
+		translate-y-[calc(var(--grid-height)*var(--place-y))]
+		;
+	}
 }
 		</style>
 	</head>
@@ -100,285 +110,283 @@
 					<!-- Ground -->
 					<div class="absolute inset-0 m-auto w-[calc(var(--grid-width)*8+2px)] h-[calc(var(--grid-height)*8+2px)] border border-[color:var(--border-color)] select-none"></div>
 					<!-- (0, 0) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*0)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="[--place-x:0] [--place-y:0] place swept"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:0] [--place-y:0]" for="sweep-1"></label>
 					<!-- (0, 1) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*1)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:0] [--place-y:1]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:0] [--place-y:1]" for="sweep-1"></label>
 					<!-- (0, 2) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*2)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:0] [--place-y:2]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:0] [--place-y:2]" for="sweep-1"></label>
 					<!-- (0, 3) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*3)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:0] [--place-y:3]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:0] [--place-y:3]" for="sweep-1"></label>
 					<!-- (0, 4) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*4)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:0] [--place-y:4]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:0] [--place-y:4]" for="sweep-1"></label>
 					<!-- (0, 5) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*5)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:0] [--place-y:5]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:0] [--place-y:5]" for="sweep-1"></label>
 					<!-- (0, 6) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*6)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:0] [--place-y:6]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:0] [--place-y:6]" for="sweep-1"></label>
 					<!-- (0, 7) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*7)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*0)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:0] [--place-y:7]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:0] [--place-y:7]" for="sweep-1"></label>
 					<!-- (1, 0) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*0)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:1] [--place-y:0]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:1] [--place-y:0]" for="sweep-1"></label>
 					<!-- (1, 1) 2 {1, 2} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*1)] swept">
+					<div class="swept place [--place-x:1] [--place-y:1]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-1:hidden peer-checked/sweep-2:hidden surface" for="sweep-2"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-2:hidden surface place [--place-x:1] [--place-y:1]" for="sweep-2"></label>
 					<!-- (1, 2) 3 {1, 3} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*2)] swept">
+					<div class="swept place [--place-x:1] [--place-y:2]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-1:hidden peer-checked/sweep-3:hidden surface" for="sweep-3"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-3:hidden surface place [--place-x:1] [--place-y:2]" for="sweep-3"></label>
 					<!-- (1, 3) 4 {1, 4} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*3)] swept">
+					<div class="swept place [--place-x:1] [--place-y:3]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-1:hidden peer-checked/sweep-4:hidden surface" for="sweep-4"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-4:hidden surface place [--place-x:1] [--place-y:3]" for="sweep-4"></label>
 					<!-- (1, 4) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*4)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:1] [--place-y:4]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:1] [--place-y:4]" for="sweep-1"></label>
 					<!-- (1, 5) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*5)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:1] [--place-y:5]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:1] [--place-y:5]" for="sweep-1"></label>
 					<!-- (1, 6) 5 {1, 5} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*6)] swept">
+					<div class="swept place [--place-x:1] [--place-y:6]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-1:hidden peer-checked/sweep-5:hidden surface" for="sweep-5"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-5:hidden surface place [--place-x:1] [--place-y:6]" for="sweep-5"></label>
 					<!-- (1, 7) 6 {1, 6} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*7)] swept">
+					<div class="swept place [--place-x:1] [--place-y:7]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*1)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-1:hidden peer-checked/sweep-6:hidden surface" for="sweep-6"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-6:hidden surface place [--place-x:1] [--place-y:7]" for="sweep-6"></label>
 					<!-- (2, 0) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*0)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:2] [--place-y:0]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:2] [--place-y:0]" for="sweep-1"></label>
 					<!-- (2, 1) 7 {1, 7} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*1)] swept">
+					<div class="swept place [--place-x:2] [--place-y:1]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<div class="relative w-[calc(var(--grid-width)*8)] h-[calc(var(--grid-height)*8)] border border-[color:var(--border-color)] select-none hidden">
-					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-1:hidden peer-checked/sweep-7:hidden surface" for="sweep-7"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-7:hidden surface place [--place-x:2] [--place-y:1]" for="sweep-7"></label>
 					<!-- (2, 2) 8 {8} 💣 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*2)] swept">
+					<div class="swept place [--place-x:2] [--place-y:2]">
 						<span class="text-2xl">💣</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-8:hidden surface" for="sweep-8"></label>
+					<label class="peer-checked/sweep-8:hidden surface place [--place-x:2] [--place-y:2]" for="sweep-8"></label>
 					<!-- (2, 3) 9 {1, 9} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*3)] swept">
+					<div class="swept place [--place-x:2] [--place-y:3]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-1:hidden peer-checked/sweep-9:hidden surface" for="sweep-9"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-9:hidden surface place [--place-x:2] [--place-y:3]" for="sweep-9"></label>
 					<!-- (2, 4) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*4)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:2] [--place-y:4]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:2] [--place-y:4]" for="sweep-1"></label>
 					<!-- (2, 5) 10 {1, 10} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*5)] swept">
+					<div class="swept place [--place-x:2] [--place-y:5]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-1:hidden peer-checked/sweep-10:hidden surface" for="sweep-10"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-10:hidden surface place [--place-x:2] [--place-y:5]" for="sweep-10"></label>
 					<!-- (2, 6) 11 {1, 11} 2 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*6)] swept">
+					<div class="swept place [--place-x:2] [--place-y:6]">
 						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-1:hidden peer-checked/sweep-11:hidden surface" for="sweep-11"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-11:hidden surface place [--place-x:2] [--place-y:6]" for="sweep-11"></label>
 					<!-- (2, 7) 12 {12} 💣 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*7)] swept">
+					<div class="swept place [--place-x:2] [--place-y:7]">
 						<span class="text-2xl">💣</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*2)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-12:hidden surface" for="sweep-12"></label>
+					<label class="peer-checked/sweep-12:hidden surface place [--place-x:2] [--place-y:7]" for="sweep-12"></label>
 					<!-- (3, 0) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*0)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:3] [--place-y:0]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:3] [--place-y:0]" for="sweep-1"></label>
 					<!-- (3, 1) 13 {1, 13} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*1)] swept">
+					<div class="swept place [--place-x:3] [--place-y:1]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-1:hidden peer-checked/sweep-13:hidden surface" for="sweep-13"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-13:hidden surface place [--place-x:3] [--place-y:1]" for="sweep-13"></label>
 					<!-- (3, 2) 14 {14} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*2)] swept">
+					<div class="swept place [--place-x:3] [--place-y:2]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-14:hidden surface" for="sweep-14"></label>
+					<label class="peer-checked/sweep-14:hidden surface place [--place-x:3] [--place-y:2]" for="sweep-14"></label>
 					<!-- (3, 3) 15 {1, 15} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*3)] swept">
+					<div class="swept place [--place-x:3] [--place-y:3]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-1:hidden peer-checked/sweep-15:hidden surface" for="sweep-15"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-15:hidden surface place [--place-x:3] [--place-y:3]" for="sweep-15"></label>
 					<!-- (3, 4) 1 {1} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*4)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-1:hidden surface" for="sweep-1"></label>
+					<div class="swept place [--place-x:3] [--place-y:4]"></div>
+					<label class="peer-checked/sweep-1:hidden surface place [--place-x:3] [--place-y:4]" for="sweep-1"></label>
 					<!-- (3, 5) 16 {1, 16} 2 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*5)] swept">
+					<div class="swept place [--place-x:3] [--place-y:5]">
 						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-1:hidden peer-checked/sweep-16:hidden surface" for="sweep-16"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-16:hidden surface place [--place-x:3] [--place-y:5]" for="sweep-16"></label>
 					<!-- (3, 6) 17 {17} 💣 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*6)] swept">
+					<div class="swept place [--place-x:3] [--place-y:6]">
 						<span class="text-2xl">💣</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-17:hidden surface" for="sweep-17"></label>
+					<label class="peer-checked/sweep-17:hidden surface place [--place-x:3] [--place-y:6]" for="sweep-17"></label>
 					<!-- (3, 7) 18 {18} 3 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*7)] swept">
+					<div class="swept place [--place-x:3] [--place-y:7]">
 						<span class="text-2xl text-[color:var(--text-3-color)]">3</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*3)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-18:hidden surface" for="sweep-18"></label>
+					<label class="peer-checked/sweep-18:hidden surface place [--place-x:3] [--place-y:7]" for="sweep-18"></label>
 					<!-- (4, 0) 19 {1, 19} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*0)] swept">
+					<div class="swept place [--place-x:4] [--place-y:0]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-1:hidden peer-checked/sweep-19:hidden surface" for="sweep-19"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-19:hidden surface place [--place-x:4] [--place-y:0]" for="sweep-19"></label>
 					<!-- (4, 1) 20 {1, 20} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*1)] swept">
+					<div class="swept place [--place-x:4] [--place-y:1]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-1:hidden peer-checked/sweep-20:hidden surface" for="sweep-20"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-20:hidden surface place [--place-x:4] [--place-y:1]" for="sweep-20"></label>
 					<!-- (4, 2) 21 {21} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*2)] swept">
+					<div class="swept place [--place-x:4] [--place-y:2]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-21:hidden surface" for="sweep-21"></label>
+					<label class="peer-checked/sweep-21:hidden surface place [--place-x:4] [--place-y:2]" for="sweep-21"></label>
 					<!-- (4, 3) 22 {1, 22} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*3)] swept">
+					<div class="swept place [--place-x:4] [--place-y:3]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-1:hidden peer-checked/sweep-22:hidden surface" for="sweep-22"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-22:hidden surface place [--place-x:4] [--place-y:3]" for="sweep-22"></label>
 					<!-- (4, 4) 23 {1, 23} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*4)] swept">
+					<div class="swept place [--place-x:4] [--place-y:4]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-1:hidden peer-checked/sweep-23:hidden surface" for="sweep-23"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-23:hidden surface place [--place-x:4] [--place-y:4]" for="sweep-23"></label>
 					<!-- (4, 5) 24 {1, 24} 2 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*5)] swept">
+					<div class="swept place [--place-x:4] [--place-y:5]">
 						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-1:hidden peer-checked/sweep-24:hidden surface" for="sweep-24"></label>
+					<label class="peer-checked/sweep-1:hidden peer-checked/sweep-24:hidden surface place [--place-x:4] [--place-y:5]" for="sweep-24"></label>
 					<!-- (4, 6) 25 {25} 💣 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*6)] swept">
+					<div class="swept place [--place-x:4] [--place-y:6]">
 						<span class="text-2xl">💣</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-25:hidden surface" for="sweep-25"></label>
+					<label class="peer-checked/sweep-25:hidden surface place [--place-x:4] [--place-y:6]" for="sweep-25"></label>
 					<!-- (4, 7) 26 {26} 2 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*7)] swept">
+					<div class="swept place [--place-x:4] [--place-y:7]">
 						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*4)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-26:hidden surface" for="sweep-26"></label>
+					<label class="peer-checked/sweep-26:hidden surface place [--place-x:4] [--place-y:7]" for="sweep-26"></label>
 					<!-- (5, 0) 27 {27} 💣 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*0)] swept">
+					<div class="swept place [--place-x:5] [--place-y:0]">
 						<span class="text-2xl">💣</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-27:hidden surface" for="sweep-27"></label>
+					<label class="peer-checked/sweep-27:hidden surface place [--place-x:5] [--place-y:0]" for="sweep-27"></label>
 					<!-- (5, 1) 28 {28} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*1)] swept">
+					<div class="swept place [--place-x:5] [--place-y:1]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-28:hidden surface" for="sweep-28"></label>
+					<label class="peer-checked/sweep-28:hidden surface place [--place-x:5] [--place-y:1]" for="sweep-28"></label>
 					<!-- (5, 2) 29 {29} 2 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*2)] swept">
+					<div class="swept place [--place-x:5] [--place-y:2]">
 						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-29:hidden surface" for="sweep-29"></label>
+					<label class="peer-checked/sweep-29:hidden surface place [--place-x:5] [--place-y:2]" for="sweep-29"></label>
 					<!-- (5, 3) 30 {30} 💣 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*3)] swept">
+					<div class="swept place [--place-x:5] [--place-y:3]">
 						<span class="text-2xl">💣</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-30:hidden surface" for="sweep-30"></label>
+					<label class="peer-checked/sweep-30:hidden surface place [--place-x:5] [--place-y:3]" for="sweep-30"></label>
 					<!-- (5, 4) 32 {31, 32} 2 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*4)] swept">
+					<div class="swept place [--place-x:5] [--place-y:4]">
 						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-31:hidden peer-checked/sweep-32:hidden surface" for="sweep-32"></label>
+					<label class="peer-checked/sweep-31:hidden peer-checked/sweep-32:hidden surface place [--place-x:5] [--place-y:4]" for="sweep-32"></label>
 					<!-- (5, 5) 33 {31, 33} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*5)] swept">
+					<div class="swept place [--place-x:5] [--place-y:5]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-31:hidden peer-checked/sweep-33:hidden surface" for="sweep-33"></label>
+					<label class="peer-checked/sweep-31:hidden peer-checked/sweep-33:hidden surface place [--place-x:5] [--place-y:5]" for="sweep-33"></label>
 					<!-- (5, 6) 34 {31, 34} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*6)] swept">
+					<div class="swept place [--place-x:5] [--place-y:6]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-31:hidden peer-checked/sweep-34:hidden surface" for="sweep-34"></label>
+					<label class="peer-checked/sweep-31:hidden peer-checked/sweep-34:hidden surface place [--place-x:5] [--place-y:6]" for="sweep-34"></label>
 					<!-- (5, 7) 35 {31, 35} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*7)] swept">
+					<div class="swept place [--place-x:5] [--place-y:7]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*5)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-31:hidden peer-checked/sweep-35:hidden surface" for="sweep-35"></label>
+					<label class="peer-checked/sweep-31:hidden peer-checked/sweep-35:hidden surface place [--place-x:5] [--place-y:7]" for="sweep-35"></label>
 					<!-- (6, 0) 36 {36} 2 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*0)] swept">
+					<div class="swept place [--place-x:6] [--place-y:0]">
 						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-36:hidden surface" for="sweep-36"></label>
+					<label class="peer-checked/sweep-36:hidden surface place [--place-x:6] [--place-y:0]" for="sweep-36"></label>
 					<!-- (6, 1) 37 {37} 2 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*1)] swept">
+					<div class="swept place [--place-x:6] [--place-y:1]">
 						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-37:hidden surface" for="sweep-37"></label>
+					<label class="peer-checked/sweep-37:hidden surface place [--place-x:6] [--place-y:1]" for="sweep-37"></label>
 					<!-- (6, 2) 38 {38} 3 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*2)] swept">
+					<div class="swept place [--place-x:6] [--place-y:2]">
 						<span class="text-2xl text-[color:var(--text-3-color)]">3</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-38:hidden surface" for="sweep-38"></label>
+					<label class="peer-checked/sweep-38:hidden surface place [--place-x:6] [--place-y:2]" for="sweep-38"></label>
 					<!-- (6, 3) 39 {39} 💣 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*3)] swept">
+					<div class="swept place [--place-x:6] [--place-y:3]">
 						<span class="text-2xl">💣</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-39:hidden surface" for="sweep-39"></label>
+					<label class="peer-checked/sweep-39:hidden surface place [--place-x:6] [--place-y:3]" for="sweep-39"></label>
 					<!-- (6, 4) 40 {31, 40} 2 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*4)] swept">
+					<div class="swept place [--place-x:6] [--place-y:4]">
 						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-31:hidden peer-checked/sweep-40:hidden surface" for="sweep-40"></label>
+					<label class="peer-checked/sweep-31:hidden peer-checked/sweep-40:hidden surface place [--place-x:6] [--place-y:4]" for="sweep-40"></label>
 					<!-- (6, 5) 31 {31} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*5)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<div class="swept place [--place-x:6] [--place-y:5]"></div>
+					<label class="peer-checked/sweep-31:hidden surface place [--place-x:6] [--place-y:5]" for="sweep-31"></label>
 					<!-- (6, 6) 31 {31} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*6)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<div class="swept place [--place-x:6] [--place-y:6]"></div>
+					<label class="peer-checked/sweep-31:hidden surface place [--place-x:6] [--place-y:6]" for="sweep-31"></label>
 					<!-- (6, 7) 31 {31} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*7)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*6)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<div class="swept place [--place-x:6] [--place-y:7]"></div>
+					<label class="peer-checked/sweep-31:hidden surface place [--place-x:6] [--place-y:7]" for="sweep-31"></label>
 					<!-- (7, 0) 41 {41} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*0)] swept">
+					<div class="swept place [--place-x:7] [--place-y:0]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*0)] peer-checked/sweep-41:hidden surface" for="sweep-41"></label>
+					<label class="peer-checked/sweep-41:hidden surface place [--place-x:7] [--place-y:0]" for="sweep-41"></label>
 					<!-- (7, 1) 42 {42} 💣 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*1)] swept">
+					<div class="swept place [--place-x:7] [--place-y:1]">
 						<span class="text-2xl">💣</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*1)] peer-checked/sweep-42:hidden surface" for="sweep-42"></label>
+					<label class="peer-checked/sweep-42:hidden surface place [--place-x:7] [--place-y:1]" for="sweep-42"></label>
 					<!-- (7, 2) 43 {43} 2 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*2)] swept">
+					<div class="swept place [--place-x:7] [--place-y:2]">
 						<span class="text-2xl text-[color:var(--text-2-color)]">2</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*2)] peer-checked/sweep-43:hidden surface" for="sweep-43"></label>
+					<label class="peer-checked/sweep-43:hidden surface place [--place-x:7] [--place-y:2]" for="sweep-43"></label>
 					<!-- (7, 3) 44 {44} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*3)] swept">
+					<div class="swept place [--place-x:7] [--place-y:3]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*3)] peer-checked/sweep-44:hidden surface" for="sweep-44"></label>
+					<label class="peer-checked/sweep-44:hidden surface place [--place-x:7] [--place-y:3]" for="sweep-44"></label>
 					<!-- (7, 4) 45 {31, 45} 1 -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*4)] swept">
+					<div class="swept place [--place-x:7] [--place-y:4]">
 						<span class="text-2xl text-[color:var(--text-1-color)]">1</span>
 					</div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*4)] peer-checked/sweep-31:hidden peer-checked/sweep-45:hidden surface" for="sweep-45"></label>
+					<label class="peer-checked/sweep-31:hidden peer-checked/sweep-45:hidden surface place [--place-x:7] [--place-y:4]" for="sweep-45"></label>
 					<!-- (7, 5) 31 {31} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*5)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*5)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<div class="swept place [--place-x:7] [--place-y:5]"></div>
+					<label class="peer-checked/sweep-31:hidden surface place [--place-x:7] [--place-y:5]" for="sweep-31"></label>
 					<!-- (7, 6) 31 {31} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*6)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*6)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<div class="swept place [--place-x:7] [--place-y:6]"></div>
+					<label class="peer-checked/sweep-31:hidden surface place [--place-x:7] [--place-y:6]" for="sweep-31"></label>
 					<!-- (7, 7) 31 {31} -->
-					<div class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*7)] swept"></div>
-					<label class="absolute inset-0 m-auto translate-x-[calc(var(--grid-width)*7)] translate-y-[calc(var(--grid-height)*7)] peer-checked/sweep-31:hidden surface" for="sweep-31"></label>
+					<div class="swept place [--place-x:7] [--place-y:7]"></div>
+					<label class="peer-checked/sweep-31:hidden surface place [--place-x:7] [--place-y:7]" for="sweep-31"></label>
 					<!-- Modal Try again -->
 					<div class="hidden absolute w-full h-full z-10 bg-[#0006] peer-checked/sweep-8:block peer-checked/sweep-12:block peer-checked/sweep-17:block peer-checked/sweep-25:block peer-checked/sweep-27:block peer-checked/sweep-30:block peer-checked/sweep-39:block peer-checked/sweep-42:block">
 						<div class="flex flex-col justify-center items-center w-full h-full">
